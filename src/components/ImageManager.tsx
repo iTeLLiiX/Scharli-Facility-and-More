@@ -237,7 +237,7 @@ const ImageManager: React.FC = () => {
 
     setImages(prev => [...prev, ...newImages]);
     setIsUploading(false);
-    setUploadProgress(0);
+      setUploadProgress(0);
     
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -250,7 +250,7 @@ const ImageManager: React.FC = () => {
       alert('Bestehende Bilder können nicht gelöscht werden. Sie sind Teil der Website.');
       return;
     }
-    setImages(prev => prev.filter(img => img.id !== imageId));
+      setImages(prev => prev.filter(img => img.id !== imageId));
   };
 
   const handleCategoryChange = (category: string) => {
@@ -277,33 +277,33 @@ const ImageManager: React.FC = () => {
         
         <div className="space-y-4">
           {/* Category Selection */}
-          <div>
+        <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Kategorie auswählen
             </label>
-            <select
-              value={selectedCategory}
+          <select
+            value={selectedCategory}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {categories.map(category => (
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            {categories.map(category => (
                 <option key={category.id} value={category.id}>
                   {category.name}
-                </option>
-              ))}
-            </select>
-          </div>
+              </option>
+            ))}
+          </select>
+      </div>
 
           {/* File Upload */}
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
-            <input
-              ref={fileInputRef}
-              type="file"
+                <input
+                  ref={fileInputRef}
+                  type="file"
               multiple
-              accept="image/*"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
@@ -315,25 +315,25 @@ const ImageManager: React.FC = () => {
             <p className="text-sm text-gray-600 mt-2">
               JPG, PNG, WebP bis 10MB pro Bild
             </p>
-          </div>
-
+              </div>
+              
           {/* Upload Progress */}
           {isUploading && (
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm text-gray-600">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm text-gray-600">
                 <span>Fortschritt</span>
                 <span>{Math.round(uploadProgress)}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${uploadProgress}%` }}
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${uploadProgress}%` }}
                 />
-              </div>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
 
       {/* Image Gallery */}
       <div className="bg-white border border-gray-200 rounded-xl p-6">
@@ -355,14 +355,14 @@ const ImageManager: React.FC = () => {
                 {category.name}
               </button>
             ))}
-          </div>
-        </div>
-
+            </div>
+              </div>
+              
         {filteredImages.length === 0 ? (
           <div className="text-center py-12">
             <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-600">Keine Bilder in dieser Kategorie</p>
-          </div>
+              </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredImages.map((image) => (
@@ -376,22 +376,22 @@ const ImageManager: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200">
                     <div className="absolute top-2 right-2 flex space-x-1">
-                      <button
-                        onClick={() => {
+                <button
+                  onClick={() => {
                           setSelectedImage(image);
                           setIsImageModalOpen(true);
                         }}
                         className="p-1 bg-white rounded-full shadow-lg hover:bg-gray-100"
                       >
                         <Eye className="w-4 h-4 text-gray-600" />
-                      </button>
+                </button>
                       {!image.isExisting && (
-                        <button
+                <button
                           onClick={() => handleDeleteImage(image.id)}
                           className="p-1 bg-white rounded-full shadow-lg hover:bg-red-100"
-                        >
+                >
                           <Trash2 className="w-4 h-4 text-red-600" />
-                        </button>
+                </button>
                       )}
                     </div>
                   </div>
@@ -415,12 +415,12 @@ const ImageManager: React.FC = () => {
                     <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
                       {image.category}
                     </span>
-                  </div>
-                </div>
               </div>
-            ))}
+            </div>
           </div>
-        )}
+            ))}
+        </div>
+      )}
       </div>
 
       {/* Image Modal */}

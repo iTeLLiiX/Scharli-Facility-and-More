@@ -1,5 +1,0 @@
-[33mc9227e8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Complete website restructuring: Remove unused components, add ContactSection, optimize structure and integrate all Thomas Scharli images
-[33m7f07907[m Add AboutSection and TestimonialsSection: Create new components to showcase team, work processes, equipment, and customer testimonials using Thomas Scharli images
-[33m4a2bd03[m Integrate real images and video: Add hero image, gallery images, service images, and transport video from Thomas Scharli
-[33md4c5407[m Fix Vercel build issue: regenerate package-lock.json to resolve Rollup dependency problem
-[33mde54a25[m Implement modern Northbound Agency design: new Header, PortfolioGallery, and Footer components with 3D animations and Glassmorphism effects
