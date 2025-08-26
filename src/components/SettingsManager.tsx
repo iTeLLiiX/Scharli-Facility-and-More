@@ -550,3 +550,4 @@ const SettingsManager: React.FC<SettingsManagerProps> = ({ addNotification }) =>
 
 export default SettingsManager;
 
+

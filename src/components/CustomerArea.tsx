@@ -1,47 +1,46 @@
 import React, { useState } from 'react';
 import { 
-  Settings, 
-  Users, 
+  Package, 
+  Truck, 
+  Calendar, 
+  MessageSquare, 
   FileText, 
-  BarChart3, 
-  LogOut, 
-  Home,
-  Truck,
-  Package,
-  Calendar,
-  MessageSquare
+  LogOut,
+  Search,
+  Filter,
+  Eye,
+  Download
 } from 'lucide-react';
 
-interface AdminPanelProps {
+interface CustomerAreaProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+const CustomerArea: React.FC<CustomerAreaProps> = ({ isOpen, onClose }) => {
+  const [activeTab, setActiveTab] = useState('overview');
 
   const handleLogout = () => {
-    // Logout logic
     window.location.href = '/';
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="admin-panel">
-      <div className="admin-sidebar">
-        <div className="admin-header">
-          <h2>Admin Panel</h2>
+    <div className="customer-area">
+      <div className="customer-sidebar">
+        <div className="customer-header">
+          <h2>Kundenbereich</h2>
           <p>Thomas Scharli Transport</p>
         </div>
         
-        <nav className="admin-nav">
+        <nav className="customer-nav">
           <button 
-            className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
+            className={`nav-item ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
           >
-            <BarChart3 className="w-5 h-5" />
-            Dashboard
+            <Package className="w-5 h-5" />
+            Übersicht
           </button>
           
           <button 
@@ -49,23 +48,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
             onClick={() => setActiveTab('transports')}
           >
             <Truck className="w-5 h-5" />
-            Transporte
+            Meine Transporte
           </button>
           
           <button 
-            className={`nav-item ${activeTab === 'customers' ? 'active' : ''}`}
-            onClick={() => setActiveTab('customers')}
-          >
-            <Users className="w-5 h-5" />
-            Kunden
-          </button>
-          
-          <button 
-            className={`nav-item ${activeTab === 'inventory' ? 'active' : ''}`}
-            onClick={() => setActiveTab('inventory')}
+            className={`nav-item ${activeTab === 'storage' ? 'active' : ''}`}
+            onClick={() => setActiveTab('storage')}
           >
             <Package className="w-5 h-5" />
-            Lager
+            Lagerung
           </button>
           
           <button 
@@ -85,15 +76,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           </button>
           
           <button 
-            className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
-            onClick={() => setActiveTab('settings')}
+            className={`nav-item ${activeTab === 'documents' ? 'active' : ''}`}
+            onClick={() => setActiveTab('documents')}
           >
-            <Settings className="w-5 h-5" />
-            Einstellungen
+            <FileText className="w-5 h-5" />
+            Dokumente
           </button>
         </nav>
         
-        <div className="admin-footer">
+        <div className="customer-footer">
           <button className="logout-btn" onClick={handleLogout}>
             <LogOut className="w-5 h-5" />
             Abmelden
@@ -101,21 +92,21 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       
-      <div className="admin-content">
+      <div className="customer-content">
         <div className="content-header">
-          <h1>{getTabTitle(activeTab)}</h1>
+          <h1>{getCustomerTabTitle(activeTab)}</h1>
           <button className="close-btn" onClick={onClose}>
             ×
           </button>
         </div>
         
         <div className="content-body">
-          {renderTabContent(activeTab)}
+          {renderCustomerTabContent(activeTab)}
         </div>
       </div>
 
       <style jsx>{`
-        .admin-panel {
+        .customer-area {
           position: fixed;
           top: 0;
           left: 0;
@@ -126,31 +117,31 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           display: flex;
         }
 
-        .admin-sidebar {
+        .customer-sidebar {
           width: 280px;
-          background: #1e293b;
+          background: #1e40af;
           color: white;
           display: flex;
           flex-direction: column;
         }
 
-        .admin-header {
+        .customer-header {
           padding: 2rem 1.5rem;
-          border-bottom: 1px solid #334155;
+          border-bottom: 1px solid #3b82f6;
         }
 
-        .admin-header h2 {
+        .customer-header h2 {
           font-size: 1.5rem;
           font-weight: 700;
           margin-bottom: 0.5rem;
         }
 
-        .admin-header p {
+        .customer-header p {
           font-size: 0.875rem;
           opacity: 0.8;
         }
 
-        .admin-nav {
+        .customer-nav {
           flex: 1;
           padding: 1rem 0;
         }
@@ -163,25 +154,25 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           gap: 0.75rem;
           background: none;
           border: none;
-          color: #cbd5e1;
+          color: #bfdbfe;
           font-size: 0.875rem;
           cursor: pointer;
           transition: all 0.2s;
         }
 
         .nav-item:hover {
-          background: #334155;
-          color: white;
-        }
-
-        .nav-item.active {
           background: #3b82f6;
           color: white;
         }
 
-        .admin-footer {
+        .nav-item.active {
+          background: #2563eb;
+          color: white;
+        }
+
+        .customer-footer {
           padding: 1rem 1.5rem;
-          border-top: 1px solid #334155;
+          border-top: 1px solid #3b82f6;
         }
 
         .logout-btn {
@@ -204,7 +195,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           background: #b91c1c;
         }
 
-        .admin-content {
+        .customer-content {
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -216,7 +207,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           background: white;
           border-bottom: 1px solid #e2e8f0;
           display: flex;
-          justify-content: between;
+          justify-content: space-between;
           align-items: center;
         }
 
@@ -247,67 +238,100 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
           overflow-y: auto;
         }
 
-        .dashboard-grid {
+        .overview-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 1.5rem;
           margin-bottom: 2rem;
         }
 
-        .stat-card {
+        .info-card {
           background: white;
           padding: 1.5rem;
           border-radius: 0.75rem;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        .stat-card h3 {
-          font-size: 0.875rem;
-          color: #64748b;
+        .info-card h3 {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #1e293b;
+          margin-bottom: 1rem;
+        }
+
+        .info-card .value {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #1e40af;
           margin-bottom: 0.5rem;
         }
 
-        .stat-card .value {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .recent-activity {
-          background: white;
-          padding: 1.5rem;
-          border-radius: 0.75rem;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .activity-item {
-          padding: 1rem 0;
-          border-bottom: 1px solid #e2e8f0;
-        }
-
-        .activity-item:last-child {
-          border-bottom: none;
-        }
-
-        .activity-item h4 {
+        .info-card .description {
           font-size: 0.875rem;
-          font-weight: 600;
-          color: #1e293b;
-          margin-bottom: 0.25rem;
-        }
-
-        .activity-item p {
-          font-size: 0.75rem;
           color: #64748b;
         }
 
+        .transport-list {
+          background: white;
+          border-radius: 0.75rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+
+        .transport-item {
+          padding: 1.5rem;
+          border-bottom: 1px solid #e2e8f0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .transport-item:last-child {
+          border-bottom: none;
+        }
+
+        .transport-info h4 {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #1e293b;
+          margin-bottom: 0.5rem;
+        }
+
+        .transport-info p {
+          font-size: 0.875rem;
+          color: #64748b;
+        }
+
+        .transport-status {
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .status-active {
+          background: #dcfce7;
+          color: #166534;
+        }
+
+        .status-completed {
+          background: #dbeafe;
+          color: #1e40af;
+        }
+
+        .status-pending {
+          background: #fef3c7;
+          color: #92400e;
+        }
+
         @media (max-width: 768px) {
-          .admin-sidebar {
+          .customer-sidebar {
             width: 100%;
             height: auto;
           }
 
-          .admin-panel {
+          .customer-area {
             flex-direction: column;
           }
 
@@ -324,56 +348,67 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   );
 };
 
-const getTabTitle = (tab: string): string => {
+const getCustomerTabTitle = (tab: string): string => {
   switch (tab) {
-    case 'dashboard': return 'Dashboard';
-    case 'transports': return 'Transporte verwalten';
-    case 'customers': return 'Kundenverwaltung';
-    case 'inventory': return 'Lagerverwaltung';
-    case 'schedule': return 'Terminplanung';
+    case 'overview': return 'Übersicht';
+    case 'transports': return 'Meine Transporte';
+    case 'storage': return 'Lagerung';
+    case 'schedule': return 'Termine';
     case 'messages': return 'Nachrichten';
-    case 'settings': return 'Einstellungen';
-    default: return 'Dashboard';
+    case 'documents': return 'Dokumente';
+    default: return 'Übersicht';
   }
 };
 
-const renderTabContent = (tab: string) => {
+const renderCustomerTabContent = (tab: string) => {
   switch (tab) {
-    case 'dashboard':
+    case 'overview':
       return (
         <div>
-          <div className="dashboard-grid">
-            <div className="stat-card">
+          <div className="overview-grid">
+            <div className="info-card">
               <h3>Aktive Transporte</h3>
-              <div className="value">12</div>
+              <div className="value">2</div>
+              <div className="description">Laufende Transporte</div>
             </div>
-            <div className="stat-card">
-              <h3>Kunden heute</h3>
-              <div className="value">8</div>
+            <div className="info-card">
+              <h3>Eingelagerte Güter</h3>
+              <div className="value">15</div>
+              <div className="description">Kartons und Möbel</div>
             </div>
-            <div className="stat-card">
-              <h3>Lagerauslastung</h3>
-              <div className="value">75%</div>
+            <div className="info-card">
+              <h3>Nächster Termin</h3>
+              <div className="value">15. Jan</div>
+              <div className="description">Büroumzug Berlin</div>
             </div>
-            <div className="stat-card">
-              <h3>Umsatz diesen Monat</h3>
-              <div className="value">€45,230</div>
+            <div className="info-card">
+              <h3>Offene Nachrichten</h3>
+              <div className="value">3</div>
+              <div className="description">Neue Nachrichten</div>
             </div>
           </div>
           
-          <div className="recent-activity">
-            <h3>Aktuelle Aktivitäten</h3>
-            <div className="activity-item">
-              <h4>Neuer Transport geplant</h4>
-              <p>Möbeltransport von München nach Hamburg - 15:30</p>
+          <div className="transport-list">
+            <div className="transport-item">
+              <div className="transport-info">
+                <h4>Möbeltransport München → Hamburg</h4>
+                <p>Status: In Bearbeitung • Geplantes Datum: 20. Januar 2025</p>
+              </div>
+              <span className="transport-status status-active">Aktiv</span>
             </div>
-            <div className="activity-item">
-              <h4>Kunde registriert</h4>
-              <p>Max Mustermann - Büroumzug in Berlin</p>
+            <div className="transport-item">
+              <div className="transport-info">
+                <h4>Büroumzug Berlin</h4>
+                <p>Status: Geplant • Geplantes Datum: 15. Januar 2025</p>
+              </div>
+              <span className="transport-status status-pending">Geplant</span>
             </div>
-            <div className="activity-item">
-              <h4>Lager aktualisiert</h4>
-              <p>Neue Einlagerung: 50 Kartons Büromaterial</p>
+            <div className="transport-item">
+              <div className="transport-info">
+                <h4>Privatumzug Frankfurt</h4>
+                <p>Status: Abgeschlossen • Datum: 10. Januar 2025</p>
+              </div>
+              <span className="transport-status status-completed">Abgeschlossen</span>
             </div>
           </div>
         </div>
@@ -382,32 +417,24 @@ const renderTabContent = (tab: string) => {
     case 'transports':
       return (
         <div>
-          <h3>Transporte verwalten</h3>
-          <p>Hier können Sie alle Transporte einsehen und verwalten.</p>
+          <h3>Meine Transporte</h3>
+          <p>Hier finden Sie alle Ihre Transporte und deren aktuellen Status.</p>
         </div>
       );
       
-    case 'customers':
+    case 'storage':
       return (
         <div>
-          <h3>Kundenverwaltung</h3>
-          <p>Verwalten Sie Ihre Kunden und deren Daten.</p>
-        </div>
-      );
-      
-    case 'inventory':
-      return (
-        <div>
-          <h3>Lagerverwaltung</h3>
-          <p>Übersicht über alle eingelagerten Güter.</p>
+          <h3>Lagerung</h3>
+          <p>Übersicht über Ihre eingelagerten Güter.</p>
         </div>
       );
       
     case 'schedule':
       return (
         <div>
-          <h3>Terminplanung</h3>
-          <p>Planen und verwalten Sie Transporttermine.</p>
+          <h3>Termine</h3>
+          <p>Ihre geplanten Transporttermine.</p>
         </div>
       );
       
@@ -415,21 +442,22 @@ const renderTabContent = (tab: string) => {
       return (
         <div>
           <h3>Nachrichten</h3>
-          <p>Kundenanfragen und interne Kommunikation.</p>
+          <p>Kommunikation mit Thomas Scharli Transport.</p>
         </div>
       );
       
-    case 'settings':
+    case 'documents':
       return (
         <div>
-          <h3>Einstellungen</h3>
-          <p>Systemeinstellungen und Konfiguration.</p>
+          <h3>Dokumente</h3>
+          <p>Ihre Transportdokumente und Rechnungen.</p>
         </div>
       );
       
     default:
-      return <div>Dashboard</div>;
+      return <div>Übersicht</div>;
   }
 };
 
-export default AdminPanel;
+export default CustomerArea;
+
